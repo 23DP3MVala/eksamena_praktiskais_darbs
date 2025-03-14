@@ -21,7 +21,7 @@ public class Piezime {
     }
 
     public String getLaiks() {
-        DateTimeFormatter formatetajs = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
+        DateTimeFormatter formatetajs = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime tgd = LocalDateTime.now();
         String laiks = tgd.format(formatetajs);
         return laiks;
