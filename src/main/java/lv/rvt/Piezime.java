@@ -1,16 +1,15 @@
 package lv.rvt;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Piezime {
     private String virsraksts;
     private String saturs;
-    private LocalDateTime laiks;
 
     public Piezime (String virsraksts, String saturs) {
         this.virsraksts = virsraksts;
         this.saturs = saturs;
-        this.laiks = LocalDateTime.now();
     }
 
     public String gatVirsraksts() {
@@ -21,12 +20,15 @@ public class Piezime {
         return saturs;
     }
 
-    public LocalDateTime getLaiks() {
+    public String getLaiks() {
+        DateTimeFormatter formatetajs = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
+        LocalDateTime tgd = LocalDateTime.now();
+        String laiks = tgd.format(formatetajs);
         return laiks;
     }
 
     @Override
     public String toString() {
-        return "Virsraksts: " + virsraksts + "\nSaturs: " + saturs + "Izveidots: " + laiks;
+        return "Virsraksts: " + virsraksts + "\nSaturs: " + saturs + "\nIzveidots: " + getLaiks();
     }
 }
