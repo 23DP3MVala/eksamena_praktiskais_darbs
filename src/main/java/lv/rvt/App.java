@@ -21,4 +21,14 @@ public class App {
         FileHandler.Saglabat(piezimes);
         System.out.println("Piezīme saglabāta!");
     }
+
+    public void IzvaditPiezimi() {
+        if (piezimes.isEmpty()) {
+            System.out.println("Netika atrasta neviena piezīme");
+            return;
+        }
+        for (int i = 0; i < piezimes.size(); i++) {
+            System.out.println((i+1) + piezimes.get(i).getVirsraksts());
+        }
+    }
 }

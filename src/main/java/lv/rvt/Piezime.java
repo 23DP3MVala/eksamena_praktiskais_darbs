@@ -12,11 +12,11 @@ public class Piezime {
         this.saturs = saturs;
     }
 
-    public String gatVirsraksts() {
+    public String getVirsraksts() {
         return virsraksts;
     }
 
-    public String geSaturs() {
+    public String getSaturs() {
         return saturs;
     }
 
