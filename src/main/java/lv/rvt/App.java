@@ -31,4 +31,18 @@ public class App {
             System.out.println((i+1) + piezimes.get(i).getVirsraksts());
         }
     }
+
+    public void paraditPiezimi() {
+        IzvaditPiezimi();
+        System.out.println("Ievadi piezīmes numuru: ");
+        int index = Integer.parseInt(input.nextLine());
+        input.nextLine();
+
+        if (index > 0 && index <= piezimes.size()) {
+            System.out.println(piezimes.get(index - 1));
+        }
+        else {
+            System.out.println("Nederīga izvēle.");
+        }
+    }
 }
