@@ -2,10 +2,13 @@ package lv.rvt;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import com.fasterxml.jackson.annotation.*;
 
 public class Piezime {
     private String virsraksts;
     private String saturs;
+
+    public Piezime() {}
 
     public Piezime (String virsraksts, String saturs) {
         this.virsraksts = virsraksts;

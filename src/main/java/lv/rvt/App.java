@@ -10,8 +10,9 @@ public class App {
         this.input = new Scanner(System.in);
     }
 
-    public void PievienotPiezimi() {
+    public void pievienotPiezimi() {
         System.out.println("Ievadi piezīmes virsrakstu: ");
+        input.nextLine();
         String virsraksts = input.nextLine();
         System.out.println("Ievadi piezīmes saturu: ");
         String saturs = input.nextLine();
@@ -22,7 +23,7 @@ public class App {
         System.out.println("Piezīme saglabāta!");
     }
 
-    public void IzvaditPiezimi() {
+    public void izvaditPiezimes() {
         if (piezimes.isEmpty()) {
             System.out.println("Netika atrasta neviena piezīme");
             return;
@@ -33,9 +34,9 @@ public class App {
     }
 
     public void paraditPiezimi() {
-        IzvaditPiezimi();
+        izvaditPiezimes();
         System.out.println("Ievadi piezīmes numuru: ");
-        int index = Integer.parseInt(input.nextLine());
+        int index = input.nextInt();
         input.nextLine();
 
         if (index > 0 && index <= piezimes.size()) {
@@ -43,6 +44,58 @@ public class App {
         }
         else {
             System.out.println("Nederīga izvēle.");
+        }
+    }
+
+    public void dzestPiezimi() {
+        izvaditPiezimes();
+        System.out.println("Ievadi piezīmes numuru lai izdzēstu: ");
+        int i = input.nextInt();
+        input.nextLine();
+        if (i > 0 && i <= piezimes.size()) {
+            piezimes.remove(i-1);
+            System.out.println("Piezīme izdzēsta");
+        }
+        else {
+            System.out.println("Nederīga izvēle.");
+        }
+    }
+
+    public void run() {
+        while (true) {
+            System.out.println("\n1. Pievienot piezīmi 2. Apskatīt piezīmes 3. Dzēst piezīmi 4. Iziet");
+            System.out.println("Izvēlies opciju: ");
+            int izvele = input.nextInt();
+            if (izvele == 1) {
+                pievienotPiezimi();
+            }
+            else if (izvele == 2) {
+                paraditPiezimi();
+            }
+            else if (izvele == 3) {
+                dzestPiezimi();
+            }
+            else if (izvele == 4) {
+                System.out.println("Atā!");
+                return;
+            }
+            else {
+                System.out.println("Nederīga izvēle.");
+            }
+
+            // switch (izvele) {
+            //     case 1:
+            //         pievienotPiezimi();
+            //     case 2:
+            //         paraditPiezimi();
+            //     case 3:
+            //         dzestPiezimi();
+            //     case 4:
+            //         System.out.println("Atā!");
+            //         return;
+            //     default:
+            //         System.out.println("Nederīga izvēle.");
+            // }
         }
     }
 }
