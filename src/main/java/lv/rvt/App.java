@@ -82,20 +82,6 @@ public class App {
             else {
                 System.out.println("Nederīga izvēle.");
             }
-
-            // switch (izvele) {
-            //     case 1:
-            //         pievienotPiezimi();
-            //     case 2:
-            //         paraditPiezimi();
-            //     case 3:
-            //         dzestPiezimi();
-            //     case 4:
-            //         System.out.println("Atā!");
-            //         return;
-            //     default:
-            //         System.out.println("Nederīga izvēle.");
-            // }
         }
     }
 }

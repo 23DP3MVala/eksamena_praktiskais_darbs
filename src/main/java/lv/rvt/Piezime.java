@@ -2,17 +2,18 @@ package lv.rvt;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import com.fasterxml.jackson.annotation.*;
 
 public class Piezime {
     private String virsraksts;
     private String saturs;
+    private String laiks;
 
     public Piezime() {}
 
     public Piezime (String virsraksts, String saturs) {
         this.virsraksts = virsraksts;
         this.saturs = saturs;
+        this.laiks = getLaiks();
     }
 
     public String getVirsraksts() {
@@ -32,6 +33,6 @@ public class Piezime {
 
     @Override
     public String toString() {
-        return "Virsraksts: " + virsraksts + "\nSaturs: " + saturs + "\nIzveidots: " + getLaiks();
+        return "Virsraksts: " + virsraksts + "\nSaturs: " + saturs + "\nIzveidots: " + laiks;
     }
 }
