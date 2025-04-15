@@ -13,7 +13,7 @@ public class Piezime {
     public Piezime (String virsraksts, String saturs) {
         this.virsraksts = virsraksts;
         this.saturs = saturs;
-        this.laiks = getLaiks();
+        this.laiks = generateLaiks();
     }
 
     public String getVirsraksts() {
@@ -25,6 +25,10 @@ public class Piezime {
     }
 
     public String getLaiks() {
+        return laiks;
+    }
+
+    public String generateLaiks() {
         DateTimeFormatter formatetajs = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime tgd = LocalDateTime.now();
         String laiks = tgd.format(formatetajs);
