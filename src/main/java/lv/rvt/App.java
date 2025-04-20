@@ -91,8 +91,15 @@ public class App {
     public void run() {
         while (true) {
             clearScreen();
+            System.out.println("""
+            ███    ██  ██████  ████████ ███████ ███████ ██       ██████  ██     ██ 
+            ████   ██ ██    ██    ██    ██      ██      ██      ██    ██ ██     ██ 
+            ██ ██  ██ ██    ██    ██    █████   █████   ██      ██    ██ ██  █  ██ 
+            ██  ██ ██ ██    ██    ██    ██      ██      ██      ██    ██ ██ ███ ██ 
+            ██   ████  ██████     ██    ███████ ██      ███████  ██████   ███ ███  
+            """);
             System.out.println("\n1. Pievienot piezīmi 2. Apskatīt piezīmes 3. Dzēst piezīmi 4. Iziet");
-            System.out.println("Izvēlies opciju: ");
+            System.out.print("Izvēlies opciju: ");
             int izvele = input.nextInt();
             if (izvele == 1) {
                 pievienotPiezimi();
