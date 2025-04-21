@@ -4,6 +4,8 @@ import java.util.*;
 public class App {
     private List<Piezime> piezimes;
     private Scanner input;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_COLOR = "\u001B[92m";
 
     public App() {
         this.piezimes = FileHandler.Ieladet();
@@ -91,13 +93,13 @@ public class App {
     public void run() {
         while (true) {
             clearScreen();
-            System.out.println("""
+            System.out.println(ANSI_COLOR + """ 
             ███    ██  ██████  ████████ ███████ ███████ ██       ██████  ██     ██ 
             ████   ██ ██    ██    ██    ██      ██      ██      ██    ██ ██     ██ 
             ██ ██  ██ ██    ██    ██    █████   █████   ██      ██    ██ ██  █  ██ 
             ██  ██ ██ ██    ██    ██    ██      ██      ██      ██    ██ ██ ███ ██ 
             ██   ████  ██████     ██    ███████ ██      ███████  ██████   ███ ███  
-            """);
+            """ + ANSI_RESET);
             System.out.println("\n1. Pievienot piezīmi 2. Apskatīt piezīmes 3. Dzēst piezīmi 4. Iziet");
             System.out.print("Izvēlies opciju: ");
             int izvele = input.nextInt();
