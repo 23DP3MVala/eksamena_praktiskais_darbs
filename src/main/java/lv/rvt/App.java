@@ -68,6 +68,7 @@ public class App {
     public void dzestPiezimi() {
         clearScreen();
         izvaditPiezimes();
+        System.out.println("");
         System.out.println("Ievadi piezīmes numuru lai izdzēstu: ");
         int i = input.nextInt();
         input.nextLine();
@@ -113,7 +114,7 @@ public class App {
                 dzestPiezimi();
             }
             else if (izvele == 4) {
-                System.out.println("Atā!");
+                clearScreen();
                 return;
             }
             else {
