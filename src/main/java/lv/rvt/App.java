@@ -31,19 +31,9 @@ public class App {
         System.out.println("Piezīme saglabāta!");
     }
 
-    public void izvaditPiezimes() {
-        if (piezimes.isEmpty()) {
-            System.out.println("Netika atrasta neviena piezīme");
-            return;
-        }
-        for (int i = 0; i < piezimes.size(); i++) {
-            System.out.println((i+1) + ". " + piezimes.get(i).getVirsraksts());
-        }
-    }
-
     public void paraditPiezimi() {
         clearScreen();
-        izvaditPiezimes();
+        tabula(piezimes);
         System.out.println("\nIevadi piezīmes numuru: ");
         int index = input.nextInt();
         input.nextLine();
@@ -67,7 +57,7 @@ public class App {
 
     public void dzestPiezimi() {
         clearScreen();
-        izvaditPiezimes();
+        tabula(piezimes);
         System.out.println("");
         System.out.println("Ievadi piezīmes numuru lai izdzēstu: ");
         int i = input.nextInt();
@@ -75,7 +65,8 @@ public class App {
         if (i > 0 && i <= piezimes.size()) {
             piezimes.remove(i-1);
             FileHandler.Saglabat(piezimes);
-            System.out.println("Piezīme izdzēsta");
+            clearScreen();
+            System.out.println("Piezīme veiksmīgi izdzēsta");
             System.out.println("\n1. Atgriezties");
             String atgriezties = input.nextLine();
             if (atgriezties.equals("1")) {
@@ -88,6 +79,22 @@ public class App {
         }
         else {
             System.out.println("Nederīga izvēle.");
+        }
+    }
+
+    private static String truncate(String text, int maxLength) {
+        return text.length() > maxLength ? text.substring(0, maxLength - 3) + "..." : text;
+    }
+
+    public void tabula(List<Piezime> note) {
+        String leftAlignFormat = "| %-3s | %-30s | %-20s |%n";
+        String separator = "+-----+--------------------------------+----------------------+";
+        System.out.printf(leftAlignFormat, "#", "Virstaksts", "Izveidots");
+        System.out.println(separator);
+        for (int i = 0; i < piezimes.size(); i++) {
+            Piezime piezime = piezimes.get(i);
+            System.out.printf(leftAlignFormat, i + 1, truncate(piezime.getVirsraksts(), 30), piezime.getLaiks());
+                
         }
     }
 
