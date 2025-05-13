@@ -1,4 +1,7 @@
 package lv.rvt;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class App {
@@ -34,9 +37,12 @@ public class App {
     public void paraditPiezimi() {
         clearScreen();
         tabula(piezimes);
-        System.out.println("\nIevadi piezīmes numuru: ");
+        System.out.println("\nIevadi piezīmes numuru vai ievadi 0. lai filtrētu: ");
         int index = input.nextInt();
         input.nextLine();
+        if (index == 0) {
+            filtrs();
+        }
 
         if (index > 0 && index <= piezimes.size()) {
             clearScreen();
@@ -91,11 +97,42 @@ public class App {
         String separator = "+-----+--------------------------------+----------------------+";
         System.out.printf(leftAlignFormat, "#", "Virstaksts", "Izveidots");
         System.out.println(separator);
-        for (int i = 0; i < piezimes.size(); i++) {
+        for (int i = 0; i < note.size(); i++) {
             Piezime piezime = piezimes.get(i);
             System.out.printf(leftAlignFormat, i + 1, truncate(piezime.getVirsraksts(), 30), piezime.getLaiks());
-                
         }
+    }
+
+    public void filtrs(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        ArrayList<Piezime> filtered = new ArrayList<Piezime>();
+
+        clearScreen();
+        System.out.print("Ievadi sākuma datumu (dd-MM-yyyy): ");
+        LocalDate start = LocalDate.parse(input.nextLine(), formatter);
+        System.out.print("Ievadi beigu datumu (dd-MM-yyyy): ");
+        LocalDate end = LocalDate.parse(input.nextLine(), formatter);
+
+        for (int i = 0; i < piezimes.size(); i++) {
+            Piezime piezime = piezimes.get(i);
+            LocalDateTime piezimeDateTime = LocalDateTime.parse(piezime.getLaiks(), outputFormatter);
+            LocalDate piezimeDate = piezimeDateTime.toLocalDate();
+            if ((piezimeDate.isEqual(start) || piezimeDate.isAfter(start)) &&
+                (piezimeDate.isEqual(end) || piezimeDate.isBefore(end))) {
+                filtered.add(piezime);
+            }
+        }
+        tabula(filtered);
+        System.out.println("\n1. Atgriezties");
+        String atgriezties = input.nextLine();
+        if (atgriezties.equals("1")) {
+            return;
+        }
+        else {
+            System.out.println("Nederīga izvēle.");
+        }
+
     }
 
     public void run() {
