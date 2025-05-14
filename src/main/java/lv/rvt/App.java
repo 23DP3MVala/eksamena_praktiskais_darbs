@@ -20,6 +20,18 @@ public class App {
         System.out.flush();
     }
 
+    public void atgriezties() {
+        System.out.println("\n1. Atgriezties");
+        String atgriezties = input.nextLine();
+        if (atgriezties.equals("1")) {
+            return;
+        }
+        else {
+            System.out.println("Nederīga izvēle.");
+        }
+
+    }
+
     public void pievienotPiezimi() {
         clearScreen();
         System.out.println("Ievadi piezīmes virsrakstu: ");
@@ -31,7 +43,8 @@ public class App {
         Piezime piezime = new Piezime(virsraksts, saturs);
         piezimes.add(piezime);
         FileHandler.Saglabat(piezimes);
-        System.out.println("Piezīme saglabāta!");
+        System.out.println("\nPiezīme saglabāta!");
+        atgriezties();
     }
 
     public void paraditPiezimi() {
@@ -47,14 +60,7 @@ public class App {
         if (index > 0 && index <= piezimes.size()) {
             clearScreen();
             System.out.println(piezimes.get(index - 1));
-            System.out.println("\n1. Atgriezties");
-            String atgriezties = input.nextLine();
-            if (atgriezties.equals("1")) {
-                return;
-            }
-            else {
-                System.out.println("Nederīga izvēle.");
-            }
+            atgriezties();
         }
         else {
             System.out.println("Nederīga izvēle.");
@@ -73,15 +79,7 @@ public class App {
             FileHandler.Saglabat(piezimes);
             clearScreen();
             System.out.println("Piezīme veiksmīgi izdzēsta");
-            System.out.println("\n1. Atgriezties");
-            String atgriezties = input.nextLine();
-            if (atgriezties.equals("1")) {
-                return;
-            }
-            else {
-                System.out.println("Nederīga izvēle.");
-            }
-
+            atgriezties();
         }
         else {
             System.out.println("Nederīga izvēle.");
@@ -98,7 +96,7 @@ public class App {
         System.out.printf(leftAlignFormat, "#", "Virstaksts", "Izveidots");
         System.out.println(separator);
         for (int i = 0; i < note.size(); i++) {
-            Piezime piezime = piezimes.get(i);
+            Piezime piezime = note.get(i);
             System.out.printf(leftAlignFormat, i + 1, truncate(piezime.getVirsraksts(), 30), piezime.getLaiks());
         }
     }
@@ -124,15 +122,7 @@ public class App {
             }
         }
         tabula(filtered);
-        System.out.println("\n1. Atgriezties");
-        String atgriezties = input.nextLine();
-        if (atgriezties.equals("1")) {
-            return;
-        }
-        else {
-            System.out.println("Nederīga izvēle.");
-        }
-
+        atgriezties();
     }
 
     public void run() {
@@ -145,7 +135,7 @@ public class App {
             ██  ██ ██ ██    ██    ██    ██      ██      ██      ██    ██ ██ ███ ██ 
             ██   ████  ██████     ██    ███████ ██      ███████  ██████   ███ ███  
             """ + ANSI_RESET);
-            System.out.println("\n1. Pievienot piezīmi 2. Apskatīt piezīmes 3. Dzēst piezīmi 4. Iziet");
+            System.out.println("\n1. Pievienot piezīmi  2. Apskatīt piezīmes  3. Dzēst piezīmi  4. Iziet");
             System.out.print("Izvēlies opciju: ");
             int izvele = input.nextInt();
             if (izvele == 1) {
