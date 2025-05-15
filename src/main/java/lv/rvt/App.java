@@ -20,16 +20,27 @@ public class App {
         System.out.flush();
     }
 
-    public void atgriezties() {
-        System.out.println("\n1. Atgriezties");
+    public void atgriezties(int n) {
+        System.out.println("\n" + n + ". Atgriezties");
         String atgriezties = input.nextLine();
-        if (atgriezties.equals("1")) {
+        if (atgriezties.equals("n")) {
             return;
         }
         else {
             System.out.println("Nederīga izvēle.");
         }
 
+    }
+
+    public void izvaditPiezimi(int i) {
+        if (i > 0 && i <= piezimes.size()) {
+            clearScreen();
+            System.out.println(piezimes.get(i - 1));
+            atgriezties(1);
+        }
+        else {
+            System.out.println("Nederīga izvēle.");
+        }
     }
 
     public void pievienotPiezimi() {
@@ -44,13 +55,14 @@ public class App {
         piezimes.add(piezime);
         FileHandler.Saglabat(piezimes);
         System.out.println("\nPiezīme saglabāta!");
-        atgriezties();
+        atgriezties(1);
     }
 
     public void paraditPiezimi() {
         clearScreen();
         tabula(piezimes);
-        System.out.print("\nIevadi piezīmes numuru vai ievadi 0. lai filtrētu vai kārtotu: ");
+        System.out.println("\n0. Filtrēt vai kārtot  #. Skatīt");
+        System.out.print("Izvēlies opciju: ");
         int index = input.nextInt();
         input.nextLine();
         if (index == 0) {
@@ -60,25 +72,16 @@ public class App {
             input.nextLine();
             if (n == 1) {
                 filtrs();
-                atgriezties();
             }
             else if (n == 2) {
                 kartot();
-                atgriezties();
             }
             else {
                 System.out.println("Nederīga izvēle.");
             }
         }
+        izvaditPiezimi(index);
 
-        if (index > 0 && index <= piezimes.size()) {
-            clearScreen();
-            System.out.println(piezimes.get(index - 1));
-            atgriezties();
-        }
-        else {
-            System.out.println("Nederīga izvēle.");
-        }
     }
 
     public void dzestPiezimi() {
@@ -93,7 +96,7 @@ public class App {
             FileHandler.Saglabat(piezimes);
             clearScreen();
             System.out.println("Piezīme veiksmīgi izdzēsta");
-            atgriezties();
+            atgriezties(1);
         }
         else {
             System.out.println("Nederīga izvēle.");
@@ -136,11 +139,20 @@ public class App {
             }
         }
         tabula(filtered);
-        atgriezties();
+        System.out.println("\n0. Atgriezties  #. Skatīt");
+        int index = input.nextInt();
+        input.nextLine();
+        if (index == 0) {
+            return;
+        }
+        else {
+        izvaditPiezimi(index);
+        }
     }
 
     public void kartot(){
-        System.out.println("Kārtot pēc:\n1. Jaunākais\n2. Vecākais\n3. Pēc nosaukuma (A -> Z)\n4. Pēc nosaukuma (Z -> A)");
+        clearScreen();
+        System.out.println("Kārtot pēc:\n1. Datums (Vecākais -> Jaunākais)\n2. Datums (Jaunākais -> Vecākais)\n3. Nosaukums (A -> Z)\n4. Nosaukums (Z -> A)");
         System.out.print("Izvēlies opciju: ");
         int izvele = input.nextInt();
         input.nextLine();
@@ -161,6 +173,15 @@ public class App {
             sakartots.sort(comparator);
             clearScreen();
             tabula(sakartots);
+            System.out.println("\n0. Atgriezties  #. Skatīt");
+            int index = input.nextInt();
+            input.nextLine();
+            if (index == 0) {
+                return;
+            }
+            else {
+            izvaditPiezimi(index);
+            }
         }
     }
 
