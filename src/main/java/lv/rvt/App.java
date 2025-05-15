@@ -66,7 +66,7 @@ public class App {
         int index = input.nextInt();
         input.nextLine();
         if (index == 0) {
-            System.out.println("1. Filtrēt  2. Kārtot ");
+            System.out.println("1. Filtrēt pēc datuma  2. Kārtot ");
             System.out.print("Izvēlies opciju: ");
             int n = input.nextInt();
             input.nextLine();
