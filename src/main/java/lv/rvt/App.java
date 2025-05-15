@@ -50,11 +50,25 @@ public class App {
     public void paraditPiezimi() {
         clearScreen();
         tabula(piezimes);
-        System.out.println("\nIevadi piezīmes numuru vai ievadi 0. lai filtrētu: ");
+        System.out.print("\nIevadi piezīmes numuru vai ievadi 0. lai filtrētu vai kārtotu: ");
         int index = input.nextInt();
         input.nextLine();
         if (index == 0) {
-            filtrs();
+            System.out.println("1. Filtrēt  2. Kārtot ");
+            System.out.print("Izvēlies opciju: ");
+            int n = input.nextInt();
+            input.nextLine();
+            if (n == 1) {
+                filtrs();
+                atgriezties();
+            }
+            else if (n == 2) {
+                kartot();
+                atgriezties();
+            }
+            else {
+                System.out.println("Nederīga izvēle.");
+            }
         }
 
         if (index > 0 && index <= piezimes.size()) {
@@ -104,7 +118,7 @@ public class App {
     public void filtrs(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        ArrayList<Piezime> filtered = new ArrayList<Piezime>();
+        List<Piezime> filtered = new ArrayList<Piezime>();
 
         clearScreen();
         System.out.print("Ievadi sākuma datumu (dd-MM-yyyy): ");
@@ -124,6 +138,32 @@ public class App {
         tabula(filtered);
         atgriezties();
     }
+
+    public void kartot(){
+        System.out.println("Kārtot pēc:\n1. Jaunākais\n2. Vecākais\n3. Pēc nosaukuma (A -> Z)\n4. Pēc nosaukuma (Z -> A)");
+        System.out.print("Izvēlies opciju: ");
+        int izvele = input.nextInt();
+        input.nextLine();
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        Comparator<Piezime> comparator = switch (izvele) {
+            case 1 -> Comparator.comparing((Piezime p) -> LocalDateTime.parse(p.getLaiks(), outputFormatter));
+            case 2 -> Comparator.comparing((Piezime p) -> LocalDateTime.parse(p.getLaiks(), outputFormatter)).reversed();
+            case 3 -> Comparator.comparing(Piezime::getVirsraksts, String.CASE_INSENSITIVE_ORDER);
+            case 4 -> Comparator.comparing(Piezime::getVirsraksts, String.CASE_INSENSITIVE_ORDER).reversed();
+            default -> {
+                System.out.println("Nederīga izvēle");
+                yield null;
+            }
+        };
+
+        if (comparator != null) {
+            List<Piezime> sakartots = new ArrayList<Piezime>(piezimes);
+            sakartots.sort(comparator);
+            clearScreen();
+            tabula(sakartots);
+        }
+    }
+
 
     public void run() {
         while (true) {
