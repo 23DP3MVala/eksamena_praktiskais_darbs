@@ -30,7 +30,7 @@ public class Piezime {
 
     public String generateLaiku() {
         DateTimeFormatter formatetajs = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime tgd = LocalDateTime.now();
+        java.time.ZonedDateTime tgd = java.time.ZonedDateTime.now(java.time.ZoneId.of("Europe/Riga"));
         String laiks = tgd.format(formatetajs);
         return laiks;
     }
